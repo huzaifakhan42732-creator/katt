@@ -1,0 +1,2 @@
+Put your "love-story.mp3" file in this folder (public/).
+It must be named exactly: love-story.mp3
