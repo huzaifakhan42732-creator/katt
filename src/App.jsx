@@ -381,23 +381,27 @@ export default function App() {
     function startScene6() {
       const env = document.getElementById('envelope-inner')
       const letter = document.getElementById('letter-paper')
+      const nextBtn = document.getElementById('btn-letter-next')
       const envelopeEl = document.getElementById('envelope')
       const clickHandler = () => {
         env.classList.add('open')
         setTimeout(() => {
           letter.classList.add('shown')
-          setTimeout(() => {
-            gsap.to('#scene-6', {
-              opacity: 0, duration: 1.3, delay: 2.5, onComplete: () => {
-                goTo('scene-7'); startScene7()
-              }
-            })
-          }, 400)
+          gsap.to(nextBtn, { opacity: 1, pointerEvents: 'auto', duration: 1, delay: 0.4 })
         }, 700)
         envelopeEl.removeEventListener('click', clickHandler)
       }
       envelopeEl.addEventListener('click', clickHandler)
     }
+
+    function onLetterNextClick() {
+      gsap.to('#scene-6', {
+        opacity: 0, duration: 1.3, onComplete: () => {
+          goTo('scene-7'); startScene7()
+        }
+      })
+    }
+    document.getElementById('btn-letter-next').addEventListener('click', onLetterNextClick)
 
     /* ============================================================
        SCENE 7 — Forgiveness
@@ -631,11 +635,13 @@ export default function App() {
               <p>Alina,</p>
               <p>I keep thinking about the moments I got wrong, and how much I wish I could go back and choose differently &mdash; your smile over my ego, patience over pride.</p>
               <p>I never wanted to hurt you. That was never the plan, and it will always be my biggest regret.</p>
+              <p>Past is past. Please forget the hurt, and let's focus on a kinder future together.</p>
               <p>Whatever happens next, I need you to know you were never the problem. You deserve someone who chooses you gently, every single day.</p>
               <p>I'm sorry. Truly.</p>
               <p className="letter-sign">&mdash; Huzaifa</p>
             </div>
           </div>
+          <button className="glow-btn" id="btn-letter-next" style={{ opacity: 0, pointerEvents: 'none', marginTop: 22 }}>Next</button>
         </section>
 
         {/* SCENE 7 */}
